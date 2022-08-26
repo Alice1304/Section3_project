@@ -1,0 +1,30 @@
+<08.22> 
+국립암센터_암자료 수집 / 암환자별 직업 라이브러리
+ 
+<08.23>
+https://www.youtube.com/watch?v=iLXNSjjWNtQ&t=43s - 참고 데이터 가져오기 
+
+
+<08.24>
+https://www.data.go.kr/index.do -> 공공데이터포털
+https://jonathansoma.com/lede/foundations-2018/classes/apis/multiple-pages-of-data-from-apis/ - 참고해서 한번에 데이터 쌓기
+
+<data.py>
+중간에 데이터 프레임들이 각각 출력되는 오류가 있었는데 빈프레임 만들고, concat해서 해결함
+
+데이터 8개 모두 불러오기 성공, concat해서 해결 완- 
+
+
+<08.25>
+12:00 늦잠 후 일어나 데이터 적재하기 성공
+14:30 적재한 데이터 다시 불러오기 성공 
+16:00 머신러닝 데이터 만들기 성공 
+플라스크 만들기 실패...는 아니고 진행중! 
+
+
+<08.26>
+
+오전중에 플라스크 웹 앱 서비스 완성~~~ 
+배포할까말까 고민중~~~ 성모님 짱이야~ 
+
+
