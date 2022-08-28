@@ -24,7 +24,11 @@ https://jonathansoma.com/lede/foundations-2018/classes/apis/multiple-pages-of-da
 
 <08.26>
 
-오전중에 플라스크 웹 앱 서비스 완성~~~ 
+오전중에 플라스크 성공~~~ 
 배포할까말까 고민중~~~ 성모님 짱이야~ 
+
+<08.28>
+
+메타베이스 만들고 플라스크 연결 성공
 
 
