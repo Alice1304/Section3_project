@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
 import pickle
 import numpy as np
+import jwt
+import time
 
 model = pickle.load(open('model.pkl', 'rb'))
 
@@ -19,45 +21,21 @@ def home():
     pred = model.predict(arr)
     return render_template('after.html', data=pred)
 
+@app.route('/dashboard')
+def dashboard():
+    METABASE_SITE_URL = "http://localhost:3000"
+    METABASE_SECRET_KEY = "294f31a32370af3cd396006e512654728896544468d687bef7dec42800cacf16"
+
+    payload = {
+            "resource": {"dashboard": 2},
+            "params": {},
+            "exp": round(time.time()) + (60 * 10) # 10 minute expiration
+    }
+    token = jwt.encode(payload, METABASE_SECRET_KEY, algorithm="HS256")
+
+    iframeUrl = METABASE_SITE_URL + "/embed/dashboard/" + token + "#bordered=true&titled=true"
+    return render_template('dashboard.html', iframeUrl = iframeUrl)
+
 if __name__ == "__main__":
     app.run(debug=True)
 
-# -------------------------
-
-# from flask import Flask, render_template, request
-# import pickle
-# import numpy as np
-
-# # ML 모델 가져오기
-# model = pickle.load(open('flask_app/model.pkl', 'rb'))
-
-# def create_app():
-#     app = Flask(__name__)
-
-#     @app.route('/')
-#     def home():
-#         return render_template('home.html') #main page
-
-    # @app.route('/dashboard')
-    # def dashboard():
-    #     return render_template('dashboard.html')
-
-#     @app.route('/predict', methods = ['POST'])
-#     def predict():
-#         data1 = (int(request.form['a']) * 3.305785) #평수를 m^2로 변환. 사람들한텐 평수가 더 편하니까.
-#         data2 = (2022 - int(request.form['b'])) # 완공년도 = 현재년도 - 연식(input)
-#         data3 = int(request.form['c'])
-#         X_test = [[data1, data2, data3]]
-#         y_pred = model.predict(X_test)
-        
-#         sundae_p = round((round(y_pred[0][0])*10000) / 6000)
-#         coffee_p = round((round(y_pred[0][0])*10000) / 3000)
-#         hamb_p = round((round(y_pred[0][0])*10000) / 5900)
-
-#         return render_template('predict.html', data=round(y_pred[0][0]), sundae=sundae_p, coffee=coffee_p, hamb=hamb_p, square=int(request.form['a']), old=int(request.form['b']),floor=data3)
-    
-#     return app
-
-# if __name__ == "__main__":
-#     app = create_app()
-#     app.run(debug=True)
